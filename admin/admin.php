@@ -8,7 +8,11 @@
   <link rel="stylesheet" href="/static/bootstrap.min.css">
 </head>
 <body data-bs-theme="dark">
-<?php require "modals.php"; ?>
+<?php
+require "../db.php";
+require "modals.php";
+$db = new DB();
+?>
 <div class="container mt-2">
   <div class="row">
     <div class="col-12">
@@ -47,9 +51,6 @@
       </div>
   </div>
 </div>
-<?php
-
-?>
 <script src="/static/bootstrap.bundle.min.js"></script>
 </body>
 </html>
