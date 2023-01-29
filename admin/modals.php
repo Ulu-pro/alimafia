@@ -34,7 +34,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" name="create" value="categories" class="btn btn-primary">Create</button>
+          <button type="submit" name="create" value="category" class="btn btn-primary">Create</button>
         </div>
       </form>
     </div>
@@ -51,7 +51,7 @@
         <?php
         if (isset($_GET["edit_category"])) {
           $id = $db->escape($_GET["edit_category"]);
-          $category = $db->find(Tables::$CATEGORIES, $id);
+          $category = $db->find(Tables::$CATEGORY, $id);
           $title = $category["title"];
           echo "
           <input type='hidden' name='id' value='$id'>
@@ -63,7 +63,7 @@
           </div>
           <div class='modal-footer'>
             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
-            <button type='submit' name='edit' value='categories' class='btn btn-primary'>Edit</button>
+            <button type='submit' name='edit' value='category' class='btn btn-primary'>Edit</button>
           </div>
           ";
         }
@@ -85,7 +85,7 @@
           <?php
           if (isset($_GET["delete_category"])) {
             $id = $db->escape($_GET["delete_category"]);
-            $category = $db->find(Tables::$CATEGORIES, $id);
+            $category = $db->find(Tables::$CATEGORY, $id);
             $title = $category["title"];
             echo "
             <input type='hidden' name='id' value='$id'>
@@ -96,7 +96,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" name="delete" value="categories" class="btn btn-primary">Delete</button>
+          <button type="submit" name="delete" value="category" class="btn btn-primary">Delete</button>
         </div>
       </form>
     </div>

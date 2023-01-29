@@ -54,7 +54,8 @@ class DB {
 }
 
 class Tables {
-  public static $CATEGORIES = "categories";
+  public static $CATEGORY = "category";
+  public static $PRODUCT = "product";
 }
 
 $db = new DB();

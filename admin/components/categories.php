@@ -1,6 +1,6 @@
 <?php if (!isset($db)) exit; ?>
-<a id="edit_category_modal" class="d-none" data-bs-toggle='modal' data-bs-target='#editCategoryModal'></a>
-<a id="delete_category_modal" class="d-none" data-bs-toggle='modal' data-bs-target='#deleteCategoryModal'></a>
+<a id="edit_category_modal" class="d-none" data-bs-toggle="modal" data-bs-target="#editCategoryModal"></a>
+<a id="delete_category_modal" class="d-none" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal"></a>
 <table class="table table-dark table-hover">
   <thead>
   <tr>
@@ -13,7 +13,7 @@
   </thead>
   <tbody>
   <?php
-  $db->select(Tables::$CATEGORIES, function ($category) {
+  $db->select(Tables::$CATEGORY, function ($category) {
     $id = $category["id"];
     $title = $category["title"];
     echo "

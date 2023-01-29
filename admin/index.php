@@ -3,7 +3,8 @@ session_start();
 require "../db.php";
 if (!isset($db)) exit;
 $tables = [
-    Tables::$CATEGORIES,
+    Tables::$CATEGORY,
+    Tables::$PRODUCT,
 ];
 
 if (!empty($_POST)) {
