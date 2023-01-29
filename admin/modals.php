@@ -57,7 +57,7 @@
           <input type='hidden' name='id' value='$id'>
           <div class='modal-body'>
             <div class='form-floating'>
-              <input type='text' name='title' value='$title' class='form-control bg-dark' id='floatingEditCategoryTitle' placeholder='Title'>
+              <input type='text' name='title' value=\"$title\" class='form-control bg-dark' id='floatingEditCategoryTitle' placeholder='Title'>
               <label for='floatingEditCategoryTitle'>Title</label>
             </div>
           </div>
@@ -80,9 +80,19 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form action="/admin" method="post">
-        <input type="hidden" name="id" value="" id="deleteCategoryRowID">
+        <input type="hidden" name="id" value="">
         <div class="modal-body">
-          <p>Are you sure you want to delete this category?</p>
+          <?php
+          if (isset($_GET["delete_category"])) {
+            $id = $db->escape($_GET["delete_category"]);
+            $category = $db->find(Tables::$CATEGORIES, $id);
+            $title = $category["title"];
+            echo "
+            <input type='hidden' name='id' value='$id'>
+            <p>Are you sure you want to delete category \"$title\"?</p>
+            ";
+          }
+          ?>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
