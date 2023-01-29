@@ -19,3 +19,7 @@ if (document.location.search !== "") {
       .split("=")[0]
   document.getElementById(action + "_modal").click()
 }
+
+for (let form of document.querySelectorAll("form")) {
+  form.setAttribute("autocomplete", "off")
+}
