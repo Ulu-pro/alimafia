@@ -1,6 +1,6 @@
 <?php
 require "db.php";
-$db = new DB();
+if (!isset($db)) exit;
 
 $db->select(Tables::$CATEGORIES, function ($category) {
   $id = $category["id"];
