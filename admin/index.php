@@ -1,16 +1,27 @@
 <?php
 session_start();
+require "../db.php";
+if (!isset($db)) exit;
+$tables = [
+    Tables::$CATEGORIES,
+];
 
 if (!empty($_POST)) {
-  $location = "";
+  $location = "admin";
   if (isset($_POST["login"])) {
     if ($_POST["account"] == "admin" &&
         $_POST["password"] == "admin") {
       $_SESSION["admin"] = "";
-      $location = "admin";
     }
   } else if (isset($_POST["logout"])) {
     session_destroy();
+    $location = "";
+  } else if (isset($_POST["create"])) {
+    if (in_array($_POST["create"], $tables)) {
+      $data = $_POST;
+      unset($data["create"]);
+      $db->insert($_POST["create"], $data);
+    }
   }
   header("Location: /$location");
 }
