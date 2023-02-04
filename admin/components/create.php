@@ -46,28 +46,28 @@
           </div>
           <div class="input-group mt-3">
             <div class="form-floating">
-              <input type="number" name="weight" class="form-control bg-dark" id="floatingCreateProductWeight" placeholder="Weight" aria-describedby="addon-wrapping-weight">
+              <input type="number" name="weight" class="form-control bg-dark" id="floatingCreateProductWeight" placeholder="Weight">
               <label for="floatingCreateProductWeight">Weight</label>
             </div>
-            <span class="input-group-text" id="addon-wrapping-weight">g</span>
+            <span class="input-group-text">g</span>
           </div>
           <div class="form-floating mt-3">
             <textarea class="form-control bg-dark" name="description" placeholder="Description" id="floatingCreateProductDescription" style="height: 100px"></textarea>
             <label for="floatingCreateProductDescription">Description</label>
           </div>
           <div class="input-group mt-3">
-            <span class="input-group-text" id="addon-wrapping-price">$</span>
+            <span class="input-group-text">$</span>
             <div class="form-floating">
-              <input type="number" name="price" class="form-control bg-dark" id="floatingCreateProductPrice" placeholder="Price" aria-describedby="addon-wrapping-price">
+              <input type="number" name="price" class="form-control bg-dark" id="floatingCreateProductPrice" placeholder="Price">
               <label for="floatingCreateProductPrice">Price</label>
             </div>
           </div>
           <div class="input-group mt-3">
             <div class="form-floating">
-              <input type="number" name="discount" class="form-control bg-dark" id="floatingCreateProductDiscount" placeholder="Discount" min="0" max="100" value="0" aria-describedby="addon-wrapping-discount">
+              <input type="number" name="discount" class="form-control bg-dark" id="floatingCreateProductDiscount" placeholder="Discount" min="0" max="100" value="0">
               <label for="floatingCreateProductDiscount">Discount</label>
             </div>
-            <span class="input-group-text" id="addon-wrapping-discount">%</span>
+            <span class="input-group-text">%</span>
           </div>
         </div>
         <div class="modal-footer">
