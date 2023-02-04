@@ -20,8 +20,10 @@ class DB {
 
   public function select($table, $callback) {
     $result = $this->db->query("SELECT * FROM $table");
-    while ($row = $result->fetch_assoc()) {
-      $callback($row);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $callback($row);
+      }
     }
   }
 

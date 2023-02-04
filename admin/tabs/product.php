@@ -26,9 +26,9 @@
     $name = $product["name"];
     $weight = $product["weight"];
     $description = $product["description"];
-    $price_original = $product["price"];
-    $discount = $product["discount"] / 100;
-    $price_discounted = $price_original * (1 - $discount);
+    $price_original = (float) $product["price"];
+    $discount = $product["discount"];
+    $price_discounted = $price_original * (1 - $discount / 100);
     $prices_formatted = "<span class='text-success'>$$price_discounted</span>";
     $prices_formatted .= $discount == 0 ? "" : " (<span class='text-danger'>$$price_original</span>)";
     echo "
