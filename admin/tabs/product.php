@@ -20,16 +20,11 @@
   <tbody>
   <?php
   $db->select(Tables::$PRODUCT, function ($product) use ($db) {
-    $id = $product["id"];
-    $category = $db->find(Tables::$CATEGORY, $product["category_id"]);
-    $category_title = $category["title"];
-    $name = $product["name"];
-    $weight = $product["weight"];
-    $description = $product["description"];
-    $price_original = (float) $product["price"];
-    $discount = $product["discount"];
-    $price_discounted = $price_original * (1 - $discount / 100);
-    $prices_formatted = "<span class='text-success'>$$price_discounted</span>";
+    [$id, $category_id, $name, $weight, $description, $price_original, $discount, $price_computed] =
+        parse_object(Tables::$PRODUCT, $product);
+    $category = $db->find(Tables::$CATEGORY, $category_id);
+    [, $category_title] = parse_object(Tables::$CATEGORY, $category);
+    $prices_formatted = "<span class='text-success'>$$price_computed</span>";
     $prices_formatted .= $discount == 0 ? "" : " (<span class='text-danger'>$$price_original</span>)";
     echo "
     <tr class='align-middle'>

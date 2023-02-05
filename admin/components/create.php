@@ -34,8 +34,7 @@
             <option selected>Select category...</option>
             <?php
             $db->select(Tables::$CATEGORY, function ($category) {
-              $id = $category["id"];
-              $title = $category["title"];
+              [$id, $title] = parse_object(Tables::$CATEGORY, $category);
               echo "<option value='$id'>$title</option>";
             });
             ?>

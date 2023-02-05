@@ -60,4 +60,27 @@ class Tables {
   public static $PRODUCT = "product";
 }
 
+function parse_object($table, $object): array {
+  switch ($table) {
+    case Tables::$CATEGORY:
+      return [
+          $object["id"],
+          $object["title"],
+      ];
+    case Tables::$PRODUCT:
+      return [
+          $object["id"],
+          $object["category_id"],
+          $object["name"],
+          $object["weight"],
+          $object["description"],
+          (float) $object["price"],
+          $object["discount"],
+          $object["price"] * (1 - $object["discount"] / 100),
+      ];
+    default:
+      return [];
+  }
+}
+
 $db = new DB();

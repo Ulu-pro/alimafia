@@ -14,8 +14,7 @@
   <tbody>
   <?php
   $db->select(Tables::$CATEGORY, function ($category) {
-    $id = $category["id"];
-    $title = $category["title"];
+    [$id, $title] = parse_object(Tables::$CATEGORY, $category);
     echo "
     <tr class='align-middle'>
       <th scope='row'>$id</th>
