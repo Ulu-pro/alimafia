@@ -33,7 +33,7 @@ if (!empty($_POST)) {
   else if (isset($_POST["edit"])) {
     if (in_array($_POST["edit"], $tables)) {
       $data = $_POST;
-      $id = $data["id"];
+      $id = $db->escape($data["id"]);
       unset($data["id"]);
       unset($data["edit"]);
       $db->update($_POST["edit"], $id, $data);
@@ -42,7 +42,7 @@ if (!empty($_POST)) {
 
   else if (isset($_POST["delete"])) {
     if (in_array($_POST["delete"], $tables)) {
-      $id = $_POST["id"];
+      $id = $db->escape($_POST["id"]);
       $db->delete($_POST["delete"], $id);
     }
   }

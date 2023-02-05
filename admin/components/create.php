@@ -62,6 +62,7 @@
             </div>
           </div>
           <div class="input-group mt-3">
+            <span class='input-group-text'>$<span data-price-computed></span></span>
             <div class="form-floating">
               <input type="number" name="discount" class="form-control bg-dark" id="floatingCreateProductDiscount" placeholder="Discount" min="0" max="100" value="0">
               <label for="floatingCreateProductDiscount">Discount</label>
