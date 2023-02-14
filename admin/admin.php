@@ -6,6 +6,19 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Admin - Ali Mafia</title>
   <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <!--<style>
+   :root {
+    --bs-dark-rgb: 0,0,0 !important;
+   }
+   [data-bs-theme=dark] {
+    --bs-body-bg: #000 !important;
+    --bs-tertiary-bg: #222 !important;
+    --bs-tertiary-bg-rgb: 25,25,25 !important;
+   }
+   .table-dark {
+    --bs-table-bg: transparent !important;
+   }
+  </style>-->
 </head>
 <body data-bs-theme="dark">
 <?php
@@ -41,15 +54,15 @@ require "components/delete.php";
           <ul class="nav nav-pills" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
               <button class="nav-link" id="pills-orders-tab" data-bs-toggle="pill" data-bs-target="#pills-orders"
-                      type="button" role="tab" aria-controls="pills-orders" aria-selected="true">Orders</button>
+                      type="button" role="tab" aria-controls="pills-orders">Orders</button>
             </li>
             <li class="nav-item" role="presentation">
               <button class="nav-link" id="pills-categories-tab" data-bs-toggle="pill" data-bs-target="#pills-categories"
-                      type="button" role="tab" aria-controls="pills-categories" aria-selected="false">Categories</button>
+                      type="button" role="tab" aria-controls="pills-categories">Categories</button>
             </li>
             <li class="nav-item" role="presentation">
               <button class="nav-link active" id="pills-products-tab" data-bs-toggle="pill" data-bs-target="#pills-products"
-                      type="button" role="tab" aria-controls="pills-products" aria-selected="false">Products</button>
+                      type="button" role="tab" aria-controls="pills-products">Products</button>
             </li>
           </ul>
           <div class="d-flex">

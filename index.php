@@ -3,7 +3,6 @@ require "db.php";
 if (!isset($db)) exit;
 
 $db->select(Tables::$CATEGORY, function ($category) {
-  $id = $category["id"];
-  $title = $category["title"];
+  [$id, $title] = parse_object(Tables::$CATEGORY, $category);
   echo "$id: $title<br>";
 });

@@ -82,37 +82,6 @@ function file_handler($id, $image, $mode) {
   if (file_exists($extension)) unlink($extension);
 }
 
-/*function file_handler($file_name, $image, $delete_mode) {
-  $directory = $_SERVER["DOCUMENT_ROOT"]."/media";
-  $max_size = 10 * (2 ** 20);
-  $allowed_types = ["jpg", "jpeg", "png"];
-  $extension = "jpg";
-
-  if ($delete_mode) {
-    unlink("$directory/$file_name.$extension");
-  } else {
-    if ($image["size"] > $max_size) {
-      echo "File size is too large";
-      return;
-    }
-
-    $file_type = pathinfo($image["name"], PATHINFO_EXTENSION);
-    if (!in_array($file_type, $allowed_types)) {
-      echo "File type is not allowed";
-      return;
-    }
-
-    if ($file_type == "jpg") {
-      $file_name .= ".jpg";
-      imagejpeg(imagecreatefromstring(file_get_contents($image["tmp_name"])),
-          $directory."/".$file_name);
-    } else {
-      $file_name .= ".".$file_type;
-      move_uploaded_file($image["tmp_name"], $directory."/".$file_name);
-    }
-  }
-}*/
-
 if (isset($_SESSION["admin"])) {
   require "admin.php";
 } else {
