@@ -14,7 +14,7 @@
             $category = $db->find(Tables::$CATEGORY, $id);
             [, $title] = parse_object(Tables::$CATEGORY, $category);
             echo "
-            <input type='hidden' name='id' value='$id'>
+            <input type='hidden' name='category_id' value='$id'>
             <p>Are you sure you want to delete category \"$title\"?</p>
             ";
           }
@@ -43,7 +43,7 @@
             $product = $db->find(Tables::$PRODUCT, $id);
             [, , $name] = parse_object(Tables::$PRODUCT, $product);
             echo "
-            <input type='hidden' name='id' value='$id'>
+            <input type='hidden' name='product_id' value='$id'>
             <p>Are you sure you want to delete product \"$name\"?</p>
             ";
           }
