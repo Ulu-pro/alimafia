@@ -23,25 +23,30 @@ if (!empty($_POST)) {
   }
 
   else if (isset($_POST["create"]) || isset($_POST["edit"]) || isset($_POST["delete"])) {
-    if (in_array($_POST["create"] ?? $_POST["edit"] ?? $_POST["delete"], $tables)) {
+    $table = $_POST["create"] ?? $_POST["edit"] ?? $_POST["delete"];
+    if (in_array($table, $tables)) {
       $data = $_POST;
-      $id = $db->escape($data["id"] ?? null);
-      unset($data["id"]);
+      $id = $db->escape($data[$table."_id"] ?? null);
+
+      unset($data[$table."_id"]);
       unset($data["create"]);
       unset($data["edit"]);
       unset($data["delete"]);
-      $mode = false;
+
       if (isset($_POST["create"])) {
-        $db->insert($_POST["create"], $data);
+        $db->insert($table, $data);
       } else if (isset($_POST["edit"])) {
-        $db->update($_POST["edit"], $id, $data);
+        $db->update($table, $id, $data);
       } else if (isset($_POST["delete"])) {
-        $db->delete($_POST["delete"], $id);
-        $mode = true;
+        $db->delete($table, $id);
       }
-      if (isset($_FILES["image"]) and $_FILES["image"]["error"] == false) {
-        file_handler($id, $_FILES["image"], $mode);
+
+      if (isset($_POST["create"]) and $table == Tables::$PRODUCT) {
+        $id = $db->get_last_id();
+        // TODO: create product_type row
       }
+      file_handler($id, $_FILES["image"] ?? null,
+          isset($_POST["delete"]));
     }
   }
 
@@ -49,28 +54,64 @@ if (!empty($_POST)) {
 }
 
 function file_handler($id, $image, $mode) {
-  $size = $image["size"];
-  $limit = 10 * (2 ** 20);
-  $temporary = $image["tmp_name"];
-  $allowed = ["png", "jpg", "jpeg", "bmp", "gif"];
-  $default = "jpg";
-  $extension = pathinfo($image["name"], PATHINFO_EXTENSION);
+  if ($image == null and !$mode) return;
+
   $directory = $_SERVER["DOCUMENT_ROOT"]."/media";
   $file = "$directory/$id.";
-  $path = $file.in_array($extension, $allowed) ? $extension : $default;
-
+  $default = "jpg";
   if (!is_dir($directory)) mkdir($directory);
   if (file_exists($file.$default)) unlink($file.$default);
+
+  $size = $image["size"];
+  $limit = 10 * (2 ** 20);
   if ($size < 0 or $size > $limit or $mode) return;
 
-  move_uploaded_file($temporary, $path);
-  $content = file_get_contents($path);
-  $convert = imagecreatefromstring($content);
-  imagejpeg($convert, $file.$default);
-  imagedestroy($convert);
+  $allowed = ["png", "jpg", "jpeg", "bmp", "gif"];
+  $extension = strtolower(pathinfo($image["name"], PATHINFO_EXTENSION));
+  if (!in_array($extension, $allowed)) return;
+
+  move_uploaded_file($image["tmp_name"], $file.$extension);
+  if ($extension != $default) {
+    $content = file_get_contents($file.$extension);
+    $convert = imagecreatefromstring($content);
+    imagejpeg($convert, $file.$default);
+    imagedestroy($convert);
+    unlink($file.$extension);
+  }
 
   if (file_exists($extension)) unlink($extension);
 }
+
+/*function file_handler($file_name, $image, $delete_mode) {
+  $directory = $_SERVER["DOCUMENT_ROOT"]."/media";
+  $max_size = 10 * (2 ** 20);
+  $allowed_types = ["jpg", "jpeg", "png"];
+  $extension = "jpg";
+
+  if ($delete_mode) {
+    unlink("$directory/$file_name.$extension");
+  } else {
+    if ($image["size"] > $max_size) {
+      echo "File size is too large";
+      return;
+    }
+
+    $file_type = pathinfo($image["name"], PATHINFO_EXTENSION);
+    if (!in_array($file_type, $allowed_types)) {
+      echo "File type is not allowed";
+      return;
+    }
+
+    if ($file_type == "jpg") {
+      $file_name .= ".jpg";
+      imagejpeg(imagecreatefromstring(file_get_contents($image["tmp_name"])),
+          $directory."/".$file_name);
+    } else {
+      $file_name .= ".".$file_type;
+      move_uploaded_file($image["tmp_name"], $directory."/".$file_name);
+    }
+  }
+}*/
 
 if (isset($_SESSION["admin"])) {
   require "admin.php";
