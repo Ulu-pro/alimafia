@@ -18,8 +18,16 @@ class DB {
     return $result;
   }
 
-  public function select($table, $callback) {
-    $result = $this->db->query("SELECT * FROM `$table`");
+  public function get_last_id() {
+    return $this->db->insert_id;
+  }
+
+  public function select($table, $callback, $descending = false, $limit = 0, $offset = 0) {
+    $query = "SELECT * FROM `$table` ORDER BY $table"."_id ";
+    $query .= $descending ? "DESC" : "ASC";
+    $query .= $limit ? " LIMIT $limit" : "";
+    $query .= $offset ? " OFFSET $offset" : "";
+    $result = $this->db->query($query);
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
         $callback($row);
@@ -80,6 +88,7 @@ function parse_object($table, $object): array {
           $object["product_name"],
           $object["product_discount"],
           $object["product_description"],
+          "/media/".$object["product_id"].".jpg",
       ];
     case Tables::$PRODUCT_TYPE:
       return [
