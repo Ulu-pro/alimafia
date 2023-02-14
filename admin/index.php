@@ -1,5 +1,4 @@
 <?php
-session_start();
 require "../db.php";
 if (!isset($db)) exit;
 $tables = [
@@ -13,12 +12,12 @@ if (!empty($_POST)) {
   if (isset($_POST["login"])) {
     if ($_POST["account"] == "admin" &&
         $_POST["password"] == "admin") {
-      $_SESSION["admin"] = "";
+      setcookie("admin", "*", strtotime("+1 year"));
     }
   }
 
   else if (isset($_POST["logout"])) {
-    session_destroy();
+    setcookie("admin", "", 1);
     $location = "";
   }
 
@@ -82,7 +81,7 @@ function file_handler($id, $image, $mode) {
   if (file_exists($extension)) unlink($extension);
 }
 
-if (isset($_SESSION["admin"])) {
+if (isset($_COOKIE["admin"])) {
   require "admin.php";
 } else {
   require "login.php";
