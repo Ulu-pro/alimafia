@@ -64,24 +64,24 @@ class DB {
 }
 
 class Tables {
-  public static $CATEGORY = "category";
-  public static $PRODUCT = "product";
-  public static $PRODUCT_TYPE = "product_type";
-  public static $ORDER = "order";
-  public static $ORDER_ITEM = "order_item";
-  public static $ORDER_STATUS = "order_status";
-  public static $USER = "user";
-  public static $CART = "cart";
+  const CATEGORY = "category";
+  const PRODUCT = "product";
+  const PRODUCT_TYPE = "product_type";
+  const ORDER = "order";
+  const ORDER_ITEM = "order_item";
+  const ORDER_STATUS = "order_status";
+  const USER = "user";
+  const CART = "cart";
 }
 
 function parse_object($table, $object): array {
   switch ($table) {
-    case Tables::$CATEGORY:
+    case Tables::CATEGORY:
       return [
           $object["category_id"],
           $object["category_title"],
       ];
-    case Tables::$PRODUCT:
+    case Tables::PRODUCT:
       return [
           $object["product_id"],
           $object["category_id"],
@@ -90,34 +90,34 @@ function parse_object($table, $object): array {
           $object["product_description"],
           "/media/".$object["product_id"].".jpg",
       ];
-    case Tables::$PRODUCT_TYPE:
+    case Tables::PRODUCT_TYPE:
       return [
           $object["product_type_id"],
           $object["product_id"],
           $object["product_type_name"],
           $object["product_type_price"],
       ];
-    case Tables::$ORDER:
+    case Tables::ORDER:
       return [
           $object["order_id"],
           $object["user_id"],
           $object["order_status_id"],
           $object["order_date"],
       ];
-    case Tables::$ORDER_ITEM:
+    case Tables::ORDER_ITEM:
       return [
           $object["order_item_id"],
           $object["order_id"],
           $object["product_type_id"],
           $object["order_item_quantity"],
       ];
-    case Tables::$ORDER_STATUS:
+    case Tables::ORDER_STATUS:
       return [
           $object["order_status_id"],
           $object["order_status_color"],
           $object["order_status_comment"],
       ];
-    case Tables::$USER:
+    case Tables::USER:
       return [
           $object["user_id"],
           $object["user_name"],
@@ -125,7 +125,7 @@ function parse_object($table, $object): array {
           $object["user_address"],
           $object["user_password"],
       ];
-    case Tables::$CART:
+    case Tables::CART:
       return [
           $object["cart_id"],
           $object["user_id"],

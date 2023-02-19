@@ -36,8 +36,8 @@
           <select name="category_id" class="form-select form-select-lg bg-dark" title="Category of Product">
             <option selected>Select category...</option>
             <?php
-            $db->select(Tables::$CATEGORY, function ($category) {
-              [$id, $title] = parse_object(Tables::$CATEGORY, $category);
+            $db->select(Tables::CATEGORY, function ($category) {
+              [$id, $title] = parse_object(Tables::CATEGORY, $category);
               echo "<option value='$id'>$title</option>";
             });
             ?>
@@ -78,11 +78,11 @@
           <select name="product_id" class="form-select form-select-lg bg-dark" title="Product for Type">
             <option selected>Select product...</option>
             <?php
-            $db->select(Tables::$CATEGORY, function ($category) use ($db) {
-              [$id, $category_title] = parse_object(Tables::$CATEGORY, $category);
+            $db->select(Tables::CATEGORY, function ($category) use ($db) {
+              [$id, $category_title] = parse_object(Tables::CATEGORY, $category);
               echo "<optgroup label='$category_title:'>";
-              $db->select(Tables::$PRODUCT, function ($product) use ($id) {
-                [$product_id, $category_id, $product_name] = parse_object(Tables::$PRODUCT, $product);
+              $db->select(Tables::PRODUCT, function ($product) use ($id) {
+                [$product_id, $category_id, $product_name] = parse_object(Tables::PRODUCT, $product);
                 echo $category_id == $id ? "<option value='$product_id'>$product_name</option>" : "";
               });
               echo "</optgroup>";

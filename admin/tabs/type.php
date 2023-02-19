@@ -16,17 +16,17 @@
   </thead>
   <tbody>
   <?php
-  $db->select(Tables::$PRODUCT_TYPE, function ($type) use ($db) {
+  $db->select(Tables::PRODUCT_TYPE, function ($type) use ($db) {
     [$id, $product_id, $type_name, $price] =
-        parse_object(Tables::$PRODUCT_TYPE, $type);
+        parse_object(Tables::PRODUCT_TYPE, $type);
 
-    $product = $db->find(Tables::$PRODUCT, $product_id);
+    $product = $db->find(Tables::PRODUCT, $product_id);
     [, $category_id, $product_name, $discount] =
-        parse_object(Tables::$PRODUCT, $product);
+        parse_object(Tables::PRODUCT, $product);
 
-    $category = $db->find(Tables::$CATEGORY, $category_id);
+    $category = $db->find(Tables::CATEGORY, $category_id);
     [, $category_title] =
-        parse_object(Tables::$CATEGORY, $category);
+        parse_object(Tables::CATEGORY, $category);
 
     $computed = $price * (1 - $discount / 100);
     $formatted = "<span class='fs-5 fw-bold'>$$computed</span>";

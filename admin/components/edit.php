@@ -10,8 +10,8 @@
         <?php
         if (isset($_GET["edit_category"])) {
           $id = $db->escape($_GET["edit_category"]);
-          $category = $db->find(Tables::$CATEGORY, $id);
-          [, $title] = parse_object(Tables::$CATEGORY, $category);
+          $category = $db->find(Tables::CATEGORY, $id);
+          [, $title] = parse_object(Tables::CATEGORY, $category);
           echo "
           <input type='hidden' name='category_id' value='$id'>
           <div class='modal-body'>
@@ -42,9 +42,9 @@
         <?php
         if (isset($_GET["edit_product"])) {
           $id = $db->escape($_GET["edit_product"]);
-          $product = $db->find(Tables::$PRODUCT, $id);
+          $product = $db->find(Tables::PRODUCT, $id);
           [, $category_id, $name, $discount, $description] =
-              parse_object(Tables::$PRODUCT, $product);
+              parse_object(Tables::PRODUCT, $product);
           echo "
           <div class='modal-body'>
             <input type='hidden' name='product_id' value='$id'>
@@ -52,8 +52,8 @@
               <input type='file' accept='image/*' name='image' class='form-control bg-dark'>
             </div>
             <select name='category_id' class='form-select form-select-lg bg-dark' title='Category of Product'>";
-          $db->select(Tables::$CATEGORY, function ($category) use ($category_id) {
-            [$id, $title] = parse_object(Tables::$CATEGORY, $category);
+          $db->select(Tables::CATEGORY, function ($category) use ($category_id) {
+            [$id, $title] = parse_object(Tables::CATEGORY, $category);
             $attribute = $category_id == $id ? "selected" : "";
             echo "<option value='$id' $attribute>$title</option>";
           });
@@ -96,18 +96,18 @@
         <?php
         if (isset($_GET["edit_type"])) {
           $id = $db->escape($_GET["edit_type"]);
-          $type = $db->find(Tables::$PRODUCT_TYPE, $id);
+          $type = $db->find(Tables::PRODUCT_TYPE, $id);
           [, $product_id, $type_name, $price] =
-              parse_object(Tables::$PRODUCT_TYPE, $type);
+              parse_object(Tables::PRODUCT_TYPE, $type);
           echo "
           <input type='hidden' name='product_type_id' value='$id'>
           <div class='modal-body'>
             <select name='product_id' class='form-select form-control-lg bg-dark' title='Product for Type'>";
-          $db->select(Tables::$CATEGORY, function ($category) use ($db, $product_id) {
-            [$id, $category_title] = parse_object(Tables::$CATEGORY, $category);
+          $db->select(Tables::CATEGORY, function ($category) use ($db, $product_id) {
+            [$id, $category_title] = parse_object(Tables::CATEGORY, $category);
             echo "<optgroup label='$category_title:'>";
-            $db->select(Tables::$PRODUCT, function ($product) use ($id, $product_id) {
-              [$current_product_id, $category_id, $product_name] = parse_object(Tables::$PRODUCT, $product);
+            $db->select(Tables::PRODUCT, function ($product) use ($id, $product_id) {
+              [$current_product_id, $category_id, $product_name] = parse_object(Tables::PRODUCT, $product);
               $attribute = $current_product_id == $product_id ? "selected" : "";
               echo $category_id == $id ? "<option value='$current_product_id' $attribute>$product_name</option>" : "";
             });

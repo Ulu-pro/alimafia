@@ -17,11 +17,11 @@
   </thead>
   <tbody>
   <?php
-  $db->select(Tables::$PRODUCT, function ($product) use ($db) {
+  $db->select(Tables::PRODUCT, function ($product) use ($db) {
     [$id, $category_id, $name, $discount, $description, $image] =
-        parse_object(Tables::$PRODUCT, $product);
-    $category = $db->find(Tables::$CATEGORY, $category_id);
-    [, $category_title] = parse_object(Tables::$CATEGORY, $category);
+        parse_object(Tables::PRODUCT, $product);
+    $category = $db->find(Tables::CATEGORY, $category_id);
+    [, $category_title] = parse_object(Tables::CATEGORY, $category);
     echo "
     <tr class='align-middle'>
       <th scope='row'>$id</th>

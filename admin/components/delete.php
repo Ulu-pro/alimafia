@@ -11,8 +11,8 @@
           <?php
           if (isset($_GET["delete_category"])) {
             $id = $db->escape($_GET["delete_category"]);
-            $category = $db->find(Tables::$CATEGORY, $id);
-            [, $title] = parse_object(Tables::$CATEGORY, $category);
+            $category = $db->find(Tables::CATEGORY, $id);
+            [, $title] = parse_object(Tables::CATEGORY, $category);
             echo "
             <input type='hidden' name='category_id' value='$id'>
             <p>Are you sure you want to delete category \"$title\"?</p>
@@ -40,8 +40,8 @@
           <?php
           if (isset($_GET["delete_product"])) {
             $id = $db->escape($_GET["delete_product"]);
-            $type = $db->find(Tables::$PRODUCT, $id);
-            [, , $name] = parse_object(Tables::$PRODUCT, $type);
+            $type = $db->find(Tables::PRODUCT, $id);
+            [, , $name] = parse_object(Tables::PRODUCT, $type);
             echo "
             <input type='hidden' name='product_id' value='$id'>
             <p>Are you sure you want to delete product \"$name\"?</p>
@@ -69,10 +69,10 @@
           <?php
           if (isset($_GET["delete_type"])) {
             $id = $db->escape($_GET["delete_type"]);
-            $type = $db->find(Tables::$PRODUCT_TYPE, $id);
-            [, $product_id, $type_name] = parse_object(Tables::$PRODUCT_TYPE, $type);
-            $product = $db->find(Tables::$PRODUCT, $product_id);
-            [, , $product_name] = parse_object(Tables::$PRODUCT, $product);
+            $type = $db->find(Tables::PRODUCT_TYPE, $id);
+            [, $product_id, $type_name] = parse_object(Tables::PRODUCT_TYPE, $type);
+            $product = $db->find(Tables::PRODUCT, $product_id);
+            [, , $product_name] = parse_object(Tables::PRODUCT, $product);
             echo "
             <input type='hidden' name='product_type_id' value='$id'>
             <p>Are you sure you want to delete product type \"$product_name: $type_name\"?</p>

@@ -13,8 +13,8 @@
   </thead>
   <tbody>
   <?php
-  $db->select(Tables::$CATEGORY, function ($category) {
-    [$id, $title] = parse_object(Tables::$CATEGORY, $category);
+  $db->select(Tables::CATEGORY, function ($category) {
+    [$id, $title] = parse_object(Tables::CATEGORY, $category);
     echo "
     <tr class='align-middle'>
       <th scope='row'>$id</th>

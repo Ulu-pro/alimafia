@@ -2,9 +2,9 @@
 require "../db.php";
 if (!isset($db)) exit;
 $tables = [
-    Tables::$CATEGORY,
-    Tables::$PRODUCT,
-    Tables::$PRODUCT_TYPE,
+    Tables::CATEGORY,
+    Tables::PRODUCT,
+    Tables::PRODUCT_TYPE,
 ];
 
 if (!empty($_POST)) {
@@ -41,7 +41,7 @@ if (!empty($_POST)) {
         $db->delete($table, $id);
       }
 
-      if (isset($_POST["create"]) and $table == Tables::$PRODUCT) {
+      if (isset($_POST["create"]) and $table == Tables::PRODUCT) {
         $id = $db->get_last_id();
       }
       if (isset($_FILES["image"]) and $_FILES["image"]["error"] == false) {
