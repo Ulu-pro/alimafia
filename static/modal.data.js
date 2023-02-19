@@ -7,9 +7,6 @@ for (let button of document.querySelectorAll(".modal-data")) {
 }
 
 for (let modal of document.querySelectorAll(".modal")) {
-  modal.addEventListener("show.bs.modal", function (event) {
-    compute(event.target.querySelector("[name='price']"))
-  })
   modal.addEventListener("hide.bs.modal", function () {
     document.location.search = ""
   })
@@ -25,18 +22,4 @@ if (document.location.search !== "") {
 
 for (let form of document.querySelectorAll("form")) {
   form.setAttribute("autocomplete", "off")
-}
-
-for (let label of document.querySelectorAll("[name='price'], [name='discount']")) {
-  label.addEventListener('input', function (event) {
-    compute(event.target)
-  })
-}
-
-function compute(element) {
-  let price, discount, computed
-  price = element.form.querySelector("[name='price']").value
-  discount = element.form.querySelector("[name='discount']").value
-  computed = element.form.querySelector("[data-price-computed]")
-  computed.innerText = (price * (1 - discount / 100)).toFixed(2)
 }
