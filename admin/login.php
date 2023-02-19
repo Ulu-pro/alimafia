@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=992">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Log in - Ali Mafia</title>
   <link rel="stylesheet" href="/static/bootstrap.min.css">
@@ -11,7 +11,7 @@
 <div class="container pt-5">
   <div class="row mt-5">
     <div class="col-4"></div>
-    <div class="col-4 p-5 border border-2 rounded-pill">
+    <div class="col-4 p-5 border border-2">
       <form action="/admin" method="post" class="p-3">
         <p class="fs-3 text-center">Admin panel</p>
         <div class="mb-3">
