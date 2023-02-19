@@ -4,6 +4,7 @@ if (!isset($db)) exit;
 $tables = [
     Tables::$CATEGORY,
     Tables::$PRODUCT,
+    Tables::$PRODUCT_TYPE,
 ];
 
 if (!empty($_POST)) {
@@ -42,10 +43,10 @@ if (!empty($_POST)) {
 
       if (isset($_POST["create"]) and $table == Tables::$PRODUCT) {
         $id = $db->get_last_id();
-        // TODO: create product_type row
       }
-      file_handler($id, $_FILES["image"] ?? null,
-          isset($_POST["delete"]));
+      if (isset($_FILES["image"]) and $_FILES["image"]["error"] == false) {
+        file_handler($id, $_FILES["image"], isset($_POST["delete"]));
+      }
     }
   }
 
