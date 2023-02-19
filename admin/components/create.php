@@ -66,3 +66,46 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="createTypeModal" tabindex="-1" aria-labelledby="createTypeLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="createTypeLabel">Create a new Product Type</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="/admin" method="post">
+        <div class="modal-body">
+          <select name="product_id" class="form-select form-select-lg bg-dark" title="Product for Type">
+            <option selected>Select product...</option>
+            <?php
+            $db->select(Tables::$CATEGORY, function ($category) use ($db) {
+              [$id, $category_title] = parse_object(Tables::$CATEGORY, $category);
+              echo "<optgroup label='$category_title:'>";
+              $db->select(Tables::$PRODUCT, function ($product) use ($id) {
+                [$product_id, $category_id, $product_name] = parse_object(Tables::$PRODUCT, $product);
+                echo $category_id == $id ? "<option value='$product_id'>$product_name</option>" : "";
+              });
+              echo "</optgroup>";
+            });
+            ?>
+          </select>
+          <div class="form-floating mt-3">
+            <input type="text" name="product_type_name" class="form-control bg-dark" id="floatingCreateTypeName" placeholder="Type">
+            <label for="floatingCreateTypeName">Type</label>
+          </div>
+          <div class="input-group mt-3">
+            <span class="input-group-text">$</span>
+            <div class="form-floating">
+              <input type="number" name="product_type_price" class="form-control bg-dark" id="floatingCreateTypePrice" placeholder="Price">
+              <label for="floatingCreateTypePrice">Price</label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" name="create" value="product_type" class="btn btn-primary">Create</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
